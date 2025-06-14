@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paradox Museum</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/inter/3.19.3/inter.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/common.css" />
+  </head>
+  <body>
+    <h1>PARADOX MUSEUM</h1>
+
+    <div class="carousel-container">
+      <div class="carousel">
+        <img
+          src="https://paradoxmuseummumbai.com/assets/img/mumbai_upsidedown.6b4bbdd0.webp"
+          class="slide active"
+          alt="Museum Exterior"
+        />
+        <img
+          src="https://www.paradoxmuseumoslo.com/wp-content/uploads/2023/10/second-post.jpg"
+          class="slide"
+          alt="Museum Interior"
+        />
+        <img
+          src="https://harrowonline.org/wp-content/uploads/2024/09/IMG_5428-scaled.jpeg"
+          class="slide"
+          alt="Museum Architecture"
+        />
+        <img
+          src="https://paradoxmuseummumbai.com/assets/img/infinity2-2.webp_mumbai.5a060239.webp"
+          class="slide"
+          alt="Museum Heritage"
+        />
+      </div>
+      <div class="nav">
+        <button onclick="goPrev()">Previous</button>
+        <button onclick="goNext()">Next</button>
+      </div>
+    </div>
+
+    <div class="about">
+  <h3>ABOUT</h3>
+  <p>
+    The Paradox Museum Mumbai, located in Fort near Chhatrapati Shivaji Maharaj Terminus, is India’s first installment of the globally renowned Paradox Museum brand. Opened in October 2024, this immersive experience spans over 10,000 sq. ft and features more than 55 mind-bending exhibits across 15 themed rooms. Designed to blur the lines between perception and reality, the museum combines science, art, and optical illusion to engage visitors of all ages with interactive, photo-worthy installations.
+  </p>
+  <p>
+    From the gravity-defying Reversed Room to the hypnotic Paradox Tunnel and the Infinity Well, each installation challenges logic and stimulates curiosity. The museum also features uniquely Indian elements, including a “Mumbai Bazaar” themed exhibit, blending global illusion design with local culture. It offers a fully immersive and shareable experience, where visitors become part of the art. With helpful staff, timed entry slots, and guided explanations through QR codes, the Paradox Museum provides a structured yet playful environment. Ideal for families, tourists, and content creators, it transforms traditional museum expectations into a modern, mind-twisting journey.
+  </p>
+</div>
+
+
+    <div class="button">
+      <a href="{{url_for('form', museum_name=museum_name)}}"><button>BOOK TICKET</button></a>
+    </div>
+
+    <script>
+      const slides = document.querySelectorAll(".slide");
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove("active"));
+        if (index >= slides.length) currentSlide = 0;
+        else if (index < 0) currentSlide = slides.length - 1;
+        else currentSlide = index;
+        slides[currentSlide].classList.add("active");
+      }
+
+      function goNext() {
+        showSlide(currentSlide + 1);
+      }
+
+      function goPrev() {
+        showSlide(currentSlide - 1);
+      }
+
+      setInterval(goNext, 5000);
+    </script>
+  </body>
+</html>

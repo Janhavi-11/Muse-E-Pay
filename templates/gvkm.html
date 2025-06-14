@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jaya He GVK New Museum</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/inter/3.19.3/inter.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/common.css" />
+  </head>
+  <body>
+    <h1>JAYA HE GVK NEW MUSEUM</h1>
+
+    <div class="carousel-container">
+      <div class="carousel">
+        <img
+          src="https://live.staticflickr.com/7023/13227298635_2100e41f5b_b.jpg"
+          class="slide active"
+          alt="Museum Exterior"
+        />
+        <img
+          src="https://mir-s3-cdn-cf.behance.net/project_modules/fs_webp/57fd4e20979497.562fa4d085652.jpg"
+          class="slide"
+          alt="Museum Interior"
+        />
+        <img
+          src="https://polkajunction.com/wp-content/uploads/2018/08/DSC01775.jpg"
+          class="slide"
+          alt="Museum Architecture"
+        />
+        <img
+          src="https://polkajunction.com/wp-content/uploads/2018/09/DSC01815.jpg"
+          class="slide"
+          alt="Museum Heritage"
+        />
+      </div>
+      <div class="nav">
+        <button onclick="goPrev()">Previous</button>
+        <button onclick="goNext()">Next</button>
+      </div>
+    </div>
+
+    <div class="about">
+      <h3>ABOUT</h3>
+      <p>
+        The Jaya He GVK New Museum at Terminal 2 of Chhatrapati Shivaji Maharaj International Airport, Mumbai, was envisioned in 2009 by Mr. Sanjay Reddy to create a world-class airport that celebrates India’s cultural identity. Opened in 2014, T2 is India’s first advanced vertical passenger terminal that combines modern infrastructure with Indian heritage. Jaya He is India’s largest public art program, featuring over 7,000 artefacts and artworks from across the country displayed along a 3.2 km central Art Wall. The museum is organized into six thematic zones, each telling unique stories of India’s past, present, and future through ritual objects, textiles, sculptures, and paintings.
+      </p>
+      <p>
+        Curated by Rajeev Sethi, the museum is a collaboration of artists, historians, and architects, blending traditional and modern art forms into an inclusive cultural experience. Passengers encounter this rich heritage throughout the terminal — from historical artefacts in the Departure area to contemporary and folk artworks in the Arrivals corridor and textile showcases in the baggage claim areas. The museum also includes Jaya He Stores and an Exhibition Space where visitors can engage further with Indian art and culture. As part of GVK’s vision, the museum transforms the airport into a vibrant cultural landmark, reflecting India’s diverse artistic legacy while serving millions of passengers annually.
+      </p>
+    </div>
+
+    <div class="button">
+      <a href="{{url_for('form', museum_name=museum_name)}}"><button>BOOK TICKET</button></a>
+    </div>
+
+    <script>
+      const slides = document.querySelectorAll(".slide");
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove("active"));
+        if (index >= slides.length) currentSlide = 0;
+        else if (index < 0) currentSlide = slides.length - 1;
+        else currentSlide = index;
+        slides[currentSlide].classList.add("active");
+      }
+
+      function goNext() {
+        showSlide(currentSlide + 1);
+      }
+
+      function goPrev() {
+        showSlide(currentSlide - 1);
+      }
+
+      setInterval(goNext, 5000);
+    </script>
+  </body>
+</html>

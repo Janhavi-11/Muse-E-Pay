@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>National Museum Of Indian Cinema</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/inter/3.19.3/inter.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/common.css" />
+  </head>
+  <body>
+    <h1>NATIONAL MUSEUM OF INDIAN CINEMA</h1>
+
+    <div class="carousel-container">
+      <div class="carousel">
+        <img
+          src="https://sceneloc8.com/wp-content/uploads/2024/04/4-80.png"
+          class="slide active"
+          alt="Museum Exterior"
+        />
+        <img
+          src="https://s7ap1.scene7.com/is/image/incredibleindia/national-museum-of-indian-cinema-mumbai-maharashtra-3-musthead-hero?qlt=82&ts=1727355264758"
+          class="slide"
+          alt="Museum Interior"
+        />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/About_Gandhi_in_the_National_Museum_of_Indian_Cinema%2C_Bombay.jpg/1280px-About_Gandhi_in_the_National_Museum_of_Indian_Cinema%2C_Bombay.jpg"
+          class="slide"
+          alt="Museum Architecture"
+        />
+        <img
+          src="https://myviewsonbollywood.wordpress.com/wp-content/uploads/2019/06/img_20190402_165958.jpg?w=656"
+          class="slide"
+          alt="Museum Heritage"
+        />
+      </div>
+      <div class="nav">
+        <button onclick="goPrev()">Previous</button>
+        <button onclick="goNext()">Next</button>
+      </div>
+    </div>
+
+    <div class="about">
+      <h3>ABOUT</h3>
+      <p>
+        The National Museum of Indian Cinema was established with an aim to showcase the rich cinematic history of India as well as to encapsulate socio-cultural history of India as revealed through the evolution of motion-pictures. Cinema is an integral part of our lives. It is a vibrant world of emotions and expressions, of adventures and fantasies, of expectations and realities, and of dreams and realizations. Out of the numerous art forms that have evolved alongside the human race, Cinema is a relatively newer yet one of the most popular art forms – of entertainment, education, employment, as well as a means to enlightenment for many. 
+      </p>
+      <p>
+        Indian Cinema has been around for more than 100 years now. Today, India has the unique distinction of producing the largest number of feature films in the world every year. Indian films and filmmakers are admired all over the globe for their uniqueness, aesthetic quality, and the entertainment quotient. 
+      </p>
+      <p>
+        A visit to the National Museum of Indian Cinema can transport us into a world of fascinating fantasies. It is the spark that ignites imagination. Talking about Indian Cinema, its inception and progress happened almost alongside the world cinema. Indian artists and filmmakers quickly adapted to new innovations and ideas, thus keeping Indian Cinema at par with Global Cinema and the journey is spectacularly portrayed at NMIC. 
+      </p>
+      <p>
+        NMIC is the only cinema museum in India that takes visitors on an absorbing journey of more than a century of Indian Cinema in a storytelling mode with the help of artefacts, visuals, music, and graphics. It is a monument that celebrates the world of Indian motion pictures. The museum is housed in two buildings, which are a combination of traditional heritage and marvellous modernity.
+      </p>
+      <p>
+        A major expansion is underway, including a new wing with a Mumbai Modern Gallery, special exhibition spaces, conservation centre, auditorium, library, and improved visitor amenities.
+      </p>
+    </div>
+
+    <div class="button">
+      <a href="{{url_for('form', museum_name=museum_name)}}"><button>BOOK TICKET</button></a>
+    </div>
+
+    <script>
+      const slides = document.querySelectorAll(".slide");
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove("active"));
+        if (index >= slides.length) currentSlide = 0;
+        else if (index < 0) currentSlide = slides.length - 1;
+        else currentSlide = index;
+        slides[currentSlide].classList.add("active");
+      }
+
+      function goNext() {
+        showSlide(currentSlide + 1);
+      }
+
+      function goPrev() {
+        showSlide(currentSlide - 1);
+      }
+
+      setInterval(goNext, 5000);
+    </script>
+  </body>
+</html>
