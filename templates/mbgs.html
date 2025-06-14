@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mani Bhavan Gandhi Sangrahalaya</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/inter/3.19.3/inter.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/common.css" />
+  </head>
+  <body>
+    <h1>MANI BHAVAN GANDHI SANGRAHALAYA</h1>
+
+    <div class="carousel-container">
+      <div class="carousel">
+        <img
+          src="https://s7ap1.scene7.com/is/image/incredibleindia/1-mani-bhavan-mumbai-maharashtra-attr-hero?qlt=82&ts=1727355275698"
+          class="slide active"
+          alt="Museum Exterior"
+        />
+        <img
+          src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/39/e5/1d/photo2jpg.jpg?w=900&h=500&s=1"
+          class="slide"
+          alt="Museum Interior"
+        />
+        <img
+          src="https://shop.museumsofindia.org/sites/default/files/2017-11/IMG_0402.JPG"
+          class="slide"
+          alt="Museum Architecture"
+        />
+        <img
+          src="https://shop.museumsofindia.org/sites/default/files/2017-11/IMG_0382.JPG"
+          class="slide"
+          alt="Museum Heritage"
+        />
+      </div>
+      <div class="nav">
+        <button onclick="goPrev()">Previous</button>
+        <button onclick="goNext()">Next</button>
+      </div>
+    </div>
+
+    <div class="about">
+      <h3>ABOUT</h3>
+      <p>
+        Mumbai played a significant role in India’s freedom movement, with its patriotic and diverse citizens actively participating in various phases of the struggle. One of the city’s most iconic connections to Mahatma Gandhi is Mani Bhavan, a modest two-storied house on Laburnum Road in the quiet neighborhood of Gamdevi. From 1917 to 1934, this building served as the hub of Gandhiji’s political and social activities in Mumbai. It belonged to Shri Revashankar Jagjeevan Jhaveri, a devoted follower and host of Gandhi. Recognizing its historic value, Pandit Jawaharlal Nehru declared in 1959 that Mani Bhavan would be preserved as a Gandhi Memorial.
+      </p>
+      <p>
+        Originally established in 1872 as the Victoria and Albert Museum, it is Mumbai’s oldest museum, showcasing the city's cultural legacy through rare collections of Fine and Decorative Arts, including clay models, dioramas, maps, lithographs, photographs, and books.
+      </p>
+      <p>
+        Mani Bhavan was not just a residence but a space where history was shaped. It was from here that Gandhiji transformed from a political agitator into a global symbol of non-violent resistance. The house witnessed the birth and implementation of Satyagraha — both individual and mass civil disobedience — as a powerful method to challenge injustice. It was the launching pad for the first phase of India’s non-violent freedom movement. The spinning wheel (charkha), which later became a symbol of self-reliance and resistance, was introduced to Gandhiji here in 1918 while he was recovering from illness.
+      </p>
+      <p>
+        ignificant national actions were initiated from Mani Bhavan. In March 1919, the Satyagraha against the oppressive Rowlatt Act was launched from this very house. When Gandhiji’s health deteriorated in January 1919, he began drinking goat’s milk at the suggestion of Kasturba, marking a key moment in his personal discipline. Furthermore, Gandhiji started his weekly bulletin Satyagrahi from Mani Bhavan on April 7, 1919, to defy the Indian Press Act. Today, Mani Bhavan stands as a sacred memorial to Gandhi’s life, work, and ideals, preserving the legacy of his time in Mumbai.
+      </p>
+    </div>
+
+    <div class="button">
+      <a href="{{url_for('form', museum_name=museum_name)}}"><button>BOOK TICKET</button></a>
+    </div>
+
+    <script>
+      const slides = document.querySelectorAll(".slide");
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove("active"));
+        if (index >= slides.length) currentSlide = 0;
+        else if (index < 0) currentSlide = slides.length - 1;
+        else currentSlide = index;
+        slides[currentSlide].classList.add("active");
+      }
+
+      function goNext() {
+        showSlide(currentSlide + 1);
+      }
+
+      function goPrev() {
+        showSlide(currentSlide - 1);
+      }
+
+      setInterval(goNext, 5000);
+    </script>
+  </body>
+</html>

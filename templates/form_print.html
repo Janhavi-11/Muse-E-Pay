@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ticket</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #2a2a44;
+        color: #000;
+      }
+
+      .ticket {
+        width: 80%;
+        max-width: 600px;
+        background-color: #f8f8f8;
+        border: 2px dashed #000;
+        border-radius: 10px;
+        margin: 50px auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: row; /* Changed from column to row */
+        align-items: flex-start; /* Align items to the top */
+        gap: 30px; /* Increased gap between QR and details */
+      }
+
+      .ticket .qr img {
+        width: 205px;
+        height: 205px;
+      }
+
+      .ticket .details {
+        flex: 1;
+        padding-top: 10px; /* Added some top padding for better alignment */
+      }
+
+      .ticket h1 {
+        font-size: 24px;
+        margin: 0 0 15px 0; /* Added bottom margin for better spacing */
+        padding: 0;
+      }
+
+      .ticket p {
+        font-size: 18px;
+        margin: 3px 0; /* Increased margin between paragraphs */
+        padding: 0;
+      }
+
+      .header {
+        padding: 60px;
+        text-align: center;
+        background: rgb(42, 42, 68);
+        color: white;
+        font-size: 24px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 50px;
+        background-color: rgb(42, 42, 68);
+        color: white;
+        font-family: Helvetica, sans-serif;
+        font-size: 18px;
+      }
+      .btn {
+        padding: 12px 32px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary {
+        background-color: #2a2a44;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: #1a1a2e;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(42, 42, 68, 0.2);
+      }
+
+      .btn-secondary {
+        background-color: #e1e1e1;
+        color: #2a2a44;
+      }
+
+      .btn-secondary:hover {
+        background-color: #d1d1d1;
+        transform: translateY(-1px);
+      }
+
+      /* Added media query for better mobile responsiveness */
+      @media (max-width: 600px) {
+        .ticket {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .ticket .details {
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Mus-E-tick</h1>
+    </div>
+    <div class="ticket">
+      <div class="qr">
+        {% if img.startswith('cid:') %}
+        <img src="{{ img }}" alt="QR Code" />
+        {% else %}
+        <img src="data:image/png;base64,{{ img }}" alt="QR Code" />
+        {% endif %}
+      </div>
+      <div class="details">
+        <h1>MUSEUM TICKET</h1>
+        <p><strong>Museum:</strong> {{ museum_name }}</p>
+        <p><strong>Name:</strong>  {{ name }}</p>
+        <p><strong>Date:</strong>  {{ visitd }}</p>
+        <p><strong>Time-slot:</strong>  {{ timeslot }}</p>
+        <p><strong>No of people:</strong>  {{ notickets }}</p>
+        <p><strong>Ticket Number:</strong>  {{ id }}</p>
+      </div>
+    </div>
+
+    <footer>
+      <p>Thank you for booking your ticket with us!</p>
+      <p>Hope you enjoy your visit.</p>
+      <p>
+        You can download the above ticket so that it can be scanned at the
+        visit.
+      </p>
+      <div class="button-group">
+        <a href="{{url_for('home')}}"
+          ><button type="button" class="btn btn-secondary">
+            Return Home
+          </button></a
+        >
+      </div>
+    </footer>
+  </body>
+</html>

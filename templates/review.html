@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MUS-E-TICK | Customer Reviews</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    #reviewsGrid {
+      max-height: 600px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #2a2a44 #e0e7ff;
+    }
+    #reviewsGrid::-webkit-scrollbar {
+      width: 8px;
+    }
+    #reviewsGrid::-webkit-scrollbar-track {
+      background: #e0e7ff;
+      border-radius: 4px;
+    }
+    #reviewsGrid::-webkit-scrollbar-thumb {
+      background-color: #2a2a44;
+      border-radius: 4px;
+    }
+    #reviewModal {
+      transition: opacity 0.3s ease;
+    }
+    #reviewModal.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #reviewModal:not(.hidden) {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #reviewsGrid > div > p {
+      max-height: 5.5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .custom-bg {
+      background-color: #2a2a44;
+    }
+    .custom-bg:hover {
+      background-color: #1f1f33;
+    }
+    .custom-border:focus {
+      border-color: #2a2a44;
+      box-shadow: 0 0 0 2px rgba(42, 42, 68, 0.4);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Review Section -->
+  <section id="reviews" class="my-12 px-6 max-w-7xl mx-auto">
+    <div class="flex items-center justify-between border-b pb-4 mb-6">
+      <div>
+        <h2 class="text-3xl font-bold">Customer Reviews</h2>
+        <p class="text-gray-600 text-sm">Share your experience with MUS-E-TICK</p>
+      </div>
+      <div class="flex items-center gap-4">
+        <input type="text" placeholder="Search reviews" class="border px-4 py-2 rounded-md focus:outline-none custom-border" />
+        <button onclick="toggleModal()" class="custom-bg text-white px-5 py-2 rounded-lg shadow hover:custom-bg">
+          Add Review
+        </button>
+      </div>
+    </div>
+
+    <!-- Reviews Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="reviewsGrid">
+      <!-- Initial reviews will go here -->
+    </div>
+
+    <!-- Add Review Modal -->
+    <div id="reviewModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50">
+      <div class="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
+        <h3 class="text-2xl font-semibold mb-4">Add Your Review</h3>
+        <form id="reviewForm" class="space-y-5">
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required
+            class="w-full border px-3 py-2 rounded focus:outline-none custom-border"
+          />
+          <textarea
+            name="review"
+            placeholder="Write your review..."
+            required
+            class="w-full border px-3 py-2 rounded focus:outline-none custom-border"
+          ></textarea>
+          <select
+            name="stars"
+            class="w-full border px-3 py-2 rounded focus:outline-none custom-border"
+            required
+          >
+            <option value="" disabled selected>Rating</option>
+            <option value="5">★★★★★</option>
+            <option value="4">★★★★☆</option>
+            <option value="3">★★★☆☆</option>
+            <option value="2">★★☆☆☆</option>
+            <option value="1">★☆☆☆☆</option>
+          </select>
+          <div class="flex justify-end gap-4">
+            <button
+              type="button"
+              onclick="toggleModal()"
+              class="text-gray-700 hover:text-black font-semibold"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="custom-bg text-white px-5 py-2 rounded font-semibold hover:custom-bg"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const avatarList = [
+      "https://avatars.dicebear.com/api/initials/AA.svg",
+      "https://avatars.dicebear.com/api/initials/BB.svg",
+      "https://avatars.dicebear.com/api/initials/CC.svg",
+      "https://avatars.dicebear.com/api/initials/DD.svg",
+      "https://avatars.dicebear.com/api/initials/EE.svg"
+    ];
+
+    function getRandomAvatar() {
+      return avatarList[Math.floor(Math.random() * avatarList.length)];
+    }
+
+    function toggleModal() {
+      document.getElementById("reviewModal").classList.toggle("hidden");
+    }
+
+    document.getElementById("reviewForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const name = form.name.value.trim();
+      const stars = parseInt(form.stars.value);
+      const review = form.review.value.trim();
+      const avatar = getRandomAvatar();
+
+      const response = await fetch("/submit_review", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, stars, review, avatar }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        const starsStr = "★".repeat(stars) + "☆".repeat(5 - stars);
+        const reviewCard = document.createElement("div");
+        reviewCard.className = "custom-bg text-white rounded-lg p-6 shadow-md";
+        reviewCard.innerHTML = `
+          <div class="flex items-center gap-4 mb-4">
+            <img src="${avatar}" alt="avatar" class="w-12 h-12 rounded-full bg-white p-1" />
+            <div>
+              <h4 class="font-semibold text-lg">${name}</h4>
+              <div class="text-yellow-400 text-xl">${starsStr}</div>
+            </div>
+          </div>
+          <p class="text-indigo-100 text-sm italic">“${review.length > 100 ? review.slice(0, 100) + "..." : review}”</p>
+        `;
+        document.getElementById("reviewsGrid").prepend(reviewCard);
+        toggleModal();
+        form.reset();
+      } else {
+        alert("Failed to submit review. Try again.");
+      }
+    });
+
+    async function loadReviews() {
+  const res = await fetch("/get_reviews");
+  const data = await res.json();
+
+  if (data.success) {
+    const reviewsGrid = document.getElementById("reviewsGrid");
+    reviewsGrid.innerHTML = "";  // Clear existing (if any)
+
+    data.reviews.forEach(r => {
+      const avatar = getRandomAvatar();
+      const starsStr = "★".repeat(r.stars) + "☆".repeat(5 - r.stars);
+      const reviewCard = document.createElement("div");
+      reviewCard.className = "custom-bg text-white rounded-lg p-6 shadow-md";
+      reviewCard.innerHTML = `
+        <div class="flex items-center gap-4 mb-4">
+          <img src="${avatar}" alt="avatar" class="w-12 h-12 rounded-full bg-white p-1" />
+          <div>
+            <h4 class="font-semibold text-lg">${r.name}</h4>
+            <div class="text-yellow-400 text-xl">${starsStr}</div>
+          </div>
+        </div>
+        <p class="text-indigo-100 text-sm italic">“${r.review.length > 100 ? r.review.slice(0, 100) + "..." : r.review}”</p>
+      `;
+      reviewsGrid.appendChild(reviewCard);
+    });
+  } else {
+    alert("Failed to load reviews.");
+  }
+}
+window.onload = loadReviews;
+  </script>
+</body>
+</html>

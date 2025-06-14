@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #ffffff;
+  color: #2a2a44;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.main-content {
+  flex: 1 0 auto;             /* grow and shrink as needed */
+  display: flex;
+  justify-content: center;    /* horizontal center */
+  align-items: center;        /* vertical center */
+  padding: 20px;
+}
+    .contact-section {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+
+    .contact-section h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+      color: #2a2a44;
+    }
+
+    .contact-section p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: #444;
+    }
+
+    .contact-form {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .contact-form input {
+      padding: 15px;
+      width: 250px;
+      border: 2px solid #2a2a44;
+      border-radius: 30px;
+      font-size: 16px;
+      color: #2a2a44;
+    }
+
+    .contact-form input::placeholder {
+      color: #aaa;
+    }
+
+    .contact-form button {
+      padding: 15px 40px;
+      border: none;
+      border-radius: 30px;
+      background-color: #2a2a44;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background-color: #1c1c35;
+    }
+
+    .footer {
+      background-color: #2a2a44;
+      color: white;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .footer-box {
+      text-align: center;
+      max-width: 250px;
+    }
+
+    .footer-box img {
+      width: 50px;
+      margin-bottom: 10px;
+    }
+
+    .footer-box h3 {
+      margin: 10px 0;
+      color: #ffffff;
+    }
+
+    .footer-box p {
+      font-size: 14px;
+      color: #cccccc;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .contact-form {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .contact-form input,
+      .contact-form button {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-content">
+    <section class="contact-section">
+      <h1>Contact Us</h1>
+      <p>Any questions or remarks? Just write us a message!</p>
+      <form class="contact-form">
+        <input type="email" placeholder="Enter a valid email address" required>
+        <input type="text" placeholder="Enter your Name" required>
+        <button type="submit">SUBMIT</button>
+      </form>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-box">
+      <img src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png" alt="About Icon">
+      <h3>ABOUT US</h3>
+      <p>Managing Museum<br>Workers</p>
+    </div>
+
+    <div class="footer-box">
+      <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Phone Icon">
+      <h3>PHONE (LANDLINE)</h3>
+      <p>+91 912 567 8987<br>+91 912 252 3336</p>
+    </div>
+
+    <div class="footer-box">
+      <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Location Icon">
+      <h3>OUR OFFICE LOCATION</h3>
+      <p>The Muse-e-pay Company<br>
+         The Courtyard, Al Quoz 1, Delhi, India</p>
+    </div>
+  </footer>
+</body>
+</html>
